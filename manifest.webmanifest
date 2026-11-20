@@ -1,0 +1,20 @@
+{
+  "name": "SKATE RUSH",
+  "short_name": "Skate Rush",
+  "description": "3D-скейт раннер: трюки, комбо и солнечный пляжный город.",
+  "lang": "ru",
+  "id": "./",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "fullscreen",
+  "display_override": ["fullscreen", "standalone"],
+  "orientation": "any",
+  "background_color": "#1576d6",
+  "theme_color": "#1ea7ff",
+  "categories": ["games"],
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
