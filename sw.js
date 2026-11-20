@@ -1,5 +1,5 @@
 // SKATE RUSH service worker: офлайн-режим после первого запуска
-const VERSION = 'skaterush-v3';
+const VERSION = 'skaterush-v4';
 const LOCAL = ['./', './index.html', './manifest.webmanifest', './icons/icon-180.png', './icons/icon-192.png', './icons/icon-512.png', './icons/icon-maskable-512.png'];
 const REMOTE = ['https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js'];
 
