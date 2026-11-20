@@ -22,6 +22,8 @@
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html,body{position:fixed;inset:0;overflow:hidden;background:#8fd8ff;touch-action:none;user-select:none;-webkit-user-select:none;-webkit-touch-callout:none;overscroll-behavior:none;font-family:'Rubik',system-ui,-apple-system,sans-serif;color:#fff}
 #c{position:fixed;inset:0;width:100%;height:100%;display:block;touch-action:none}
+/* iOS home-screen: растягиваем на весь экран, включая нижнюю зону */
+html,body,#c,#hud,#controls,.screen,#vign,#flash{bottom:auto;height:100vh;height:100lvh}
 .screen{position:fixed;inset:0;display:none;z-index:30}
 .screen.show{display:flex}
 .out{text-shadow:2px 2px 0 var(--navy),-2px 2px 0 var(--navy),2px -2px 0 var(--navy),-2px -2px 0 var(--navy),0 3px 0 var(--navy)}
@@ -149,20 +151,20 @@ html,body{position:fixed;inset:0;overflow:hidden;background:#8fd8ff;touch-action
 }
 @media (max-height:380px){#bJump{width:100px;height:100px}#bGrind{bottom:calc(140px + var(--sab))}#bSpin{bottom:calc(100px + var(--sab))}}
 /* ---------- fx overlays ---------- */
-.pop{position:fixed;left:50%;top:34%;transform:translate(-50%,0);font:italic 900 30px/1 Rubik;color:#fff;white-space:nowrap;pointer-events:none;z-index:13;opacity:0;text-align:center;text-shadow:2px 2px 0 var(--navy),-2px 2px 0 var(--navy),2px -2px 0 var(--navy),-2px -2px 0 var(--navy),0 4px 0 var(--navy)}
-.pop small{display:block;font-size:17px;color:var(--yel);margin-top:4px}
+.pop{position:fixed;left:auto;right:calc(14px + var(--sar));top:34%;transform:none;font:italic 900 19px/1 Rubik;color:#fff;white-space:nowrap;pointer-events:none;z-index:13;opacity:0;text-align:right;transform-origin:100% 50%;text-shadow:2px 2px 0 var(--navy),-2px 2px 0 var(--navy),2px -2px 0 var(--navy),-2px -2px 0 var(--navy),0 3px 0 var(--navy)}
+.pop small{display:block;font-size:13px;color:var(--yel);margin-top:2px}
 .pop.show{animation:pop 1.25s ease-out forwards}
-.pop.good{color:var(--yel);font-size:36px}
+.pop.good{color:var(--yel);font-size:23px}
 .pop.good small{color:#fff}
-.pop.bad{color:#ff4d6d;font-size:40px}
+.pop.bad{color:#ff4d6d;font-size:26px}
 .pop.warn{color:#ffa94d}
-.pop.mini{font-size:20px}
-.pop.big{font-size:54px;color:var(--yel)}
-@keyframes pop{0%{opacity:0;transform:translate(-50%,10px) scale(.4)}12%{opacity:1;transform:translate(-50%,-6px) scale(1.18)}24%{transform:translate(-50%,-10px) scale(1)}75%{opacity:1}100%{opacity:0;transform:translate(-50%,-64px) scale(.95)}}
-#hint{position:fixed;left:50%;bottom:calc(var(--sab) + 18px);transform:translate(-50%,-10px);background:rgba(19,41,75,.85);border:3px solid #fff;border-radius:16px;padding:10px 18px;font:900 16px/1.25 Rubik;text-align:center;max-width:86vw;z-index:13;pointer-events:none;opacity:0;transition:opacity .25s,transform .25s}
+.pop.mini{font-size:15px}
+.pop.big{font-size:40px;color:var(--yel);right:auto;left:50%;margin-left:-90px;text-align:center}
+@keyframes pop{0%{opacity:0;transform:translate(16px,0) scale(.6)}14%{opacity:1;transform:translate(0,0) scale(1.08)}26%{transform:translate(0,-2px) scale(1)}70%{opacity:1}100%{opacity:0;transform:translate(0,-26px) scale(.95)}}
+#hint{position:fixed;left:50%;bottom:calc(var(--sab) + 18px);transform:translate(-50%,-10px);background:rgba(19,41,75,.85);border:3px solid #fff;border-radius:16px;padding:7px 14px;font:900 14px/1.25 Rubik;text-align:center;max-width:80vw;z-index:13;pointer-events:none;opacity:0;transition:opacity .25s,transform .25s}
 #hint.show{opacity:1;transform:translate(-50%,0)}
 @media (orientation:landscape){#hint{max-width:40vw;font-size:14px}}
-@media (orientation:portrait){#hint{bottom:auto;top:48%}}
+@media (orientation:portrait){#hint{bottom:auto;top:calc(var(--sat) + 150px)}}
 #cd{position:fixed;left:50%;top:40%;transform:translate(-50%,-50%);font:900 120px/1 Bungee,Impact,sans-serif;color:var(--yel);z-index:13;pointer-events:none;display:none;text-shadow:4px 4px 0 var(--navy),-4px 4px 0 var(--navy),4px -4px 0 var(--navy),-4px -4px 0 var(--navy),0 10px 0 var(--pink)}
 #cd.anim{animation:cd .9s ease-out}
 @keyframes cd{0%{transform:translate(-50%,-50%) scale(2);opacity:0}25%{transform:translate(-50%,-50%) scale(1);opacity:1}100%{opacity:.9}}
@@ -223,6 +225,7 @@ html,body{position:fixed;inset:0;overflow:hidden;background:#8fd8ff;touch-action
 <div id="settings" class="screen panel"><div class="card"><div class="card-h">SETTINGS<div class="x" data-back>✕</div></div><div class="scroll">
  <div class="row">Звук<div class="seg" id="sSound"><div data-v="1">ВКЛ</div><div data-v="0">ВЫКЛ</div></div></div>
  <div class="row">Графика<div class="seg" id="sQual"><div data-v="auto">AUTO</div><div data-v="low">LOW</div><div data-v="medium">MED</div><div data-v="high">HIGH</div></div></div>
+ <div class="row">Подсказки<div class="seg" id="sHints"><div data-v="1">ВКЛ</div><div data-v="0">ВЫКЛ</div></div></div>
  <div class="row">Показывать FPS<div class="seg" id="sFps"><div data-v="1">ДА</div><div data-v="0">НЕТ</div></div></div>
  <div class="help"><b>Телефон:</b> джойстик ←→ — полоса, ↑ — прыжок, ↓ — пригнуться. JUMP — Ollie. В воздухе: FLIP — Kickflip (с ↓ — Heelflip), SPIN — 360 (с ↑ — Backflip). GRIND — у красных перил.<br><b>Клавиатура:</b> ←→/A D — полоса, ↑/W — прыжок, ↓/S — пригнуться, Пробел — Ollie, J — Flip, K — Spin, L — Grind, Esc/P — пауза.</div>
 </div></div></div>
@@ -313,7 +316,7 @@ const IS_TOUCH = (window.matchMedia && matchMedia('(pointer:coarse)').matches) |
 
 // ---------------- save ----------------
 const SAVE_KEY = 'skaterush_save_v1';
-const DEF_SAVE = { best: [0, 0, 0], completed: [false, false, false], unlocked: 1, sound: true, quality: 'auto', totalTricks: 0, bestCombo: 0, showFps: false };
+const DEF_SAVE = { best: [0, 0, 0], completed: [false, false, false], unlocked: 1, sound: true, quality: 'auto', totalTricks: 0, bestCombo: 0, showFps: false, hints: true };
 function loadSave() {
   let s = JSON.parse(JSON.stringify(DEF_SAVE));
   try { const raw = localStorage.getItem(SAVE_KEY); if (raw) { const o = JSON.parse(raw); if (o && typeof o === 'object') s = Object.assign(s, o); } } catch (e) {}
@@ -327,12 +330,12 @@ function persist() { try { localStorage.setItem(SAVE_KEY, JSON.stringify(save));
 
 // ---------------- levels ----------------
 const LEVELS = [
-  { name: 'BEACH RIDE', ru: 'Обучение, спокойная скорость', dur: 60, v0: 13, v1: 18, gap: [1.9, 2.5], lives: 3, tutorial: true,
-    pat: { single: 6, two: 2, ramp: 2, rail: 2, lowbar: 1, pit: 1, slalom: 1, wall: 1 } },
-  { name: 'COASTAL RUSH', ru: 'Быстрее, комбинации препятствий', dur: 75, v0: 17, v1: 24, gap: [1.35, 1.85], lives: 3,
-    pat: { single: 2, two: 4, wall: 2, carCones: 3, ramp: 2, rail: 3, lowbar: 2, pit: 2, slalom: 2, cars2: 2 } },
-  { name: 'EXTREME BEACH', ru: 'Максимальная скорость, трамплины и перила', dur: 90, v0: 21, v1: 30, gap: [1.05, 1.45], lives: 3,
-    pat: { two: 3, wall: 3, carCones: 3, ramp: 4, rampCar: 3, rail: 4, railDouble: 2, lowbar: 2, pit: 2, slalom: 2, cars2: 3, mixed: 3 } },
+  { name: 'BEACH RIDE', ru: 'Обучение, спокойная скорость', dur: 60, v0: 13, v1: 18, gap: [1.55, 2.05], lives: 3, tutorial: true,
+    pat: { single: 4, two: 3, ramp: 2, rail: 5, railLine: 2, railSide: 1, lowbar: 1, pit: 1, slalom: 2, wall: 1, double: 2 } },
+  { name: 'COASTAL RUSH', ru: 'Быстрее, комбинации препятствий', dur: 75, v0: 17, v1: 24, gap: [1.1, 1.5], lives: 3,
+    pat: { single: 1, two: 4, wall: 2, carCones: 3, ramp: 3, rail: 5, railLine: 3, railSide: 3, railDouble: 2, lowbar: 2, pit: 2, slalom: 2, cars2: 2, double: 3, gauntlet: 2 } },
+  { name: 'EXTREME BEACH', ru: 'Максимальная скорость, трамплины и перила', dur: 90, v0: 21, v1: 30, gap: [.9, 1.25], lives: 3,
+    pat: { two: 3, wall: 3, carCones: 3, ramp: 4, rampCar: 3, rail: 5, railLine: 4, railSide: 4, railDouble: 4, lowbar: 2, pit: 2, slalom: 2, cars2: 3, mixed: 3, double: 3, gauntlet: 3 } },
 ];
 
 // ---------------- constants ----------------
@@ -1505,6 +1508,14 @@ const PAT = {
   ramp(z) { const [a, b] = L3(); placeObs('ramp', a, z); if (Math.random() < .6) placeObs('cone', b, z - 2); return 5; },
   rampCar(z) { const [a, b] = L3(); placeObs('ramp', a, z); placeObs('car', a, z - 7); placeObs('car', b, z - 2); return 12; },
   rail(z) { const [a, b] = L3(), L = pick([8, 11, 14]); placeRail(a, z, L); if (Math.random() < .5) placeObs(pick(LOWS), b, z - 1); return L + 1; },
+  // длинная линия перил: две подряд в одной полосе — можно грайндить без остановки
+  railLine(z) { const [a, b] = L3(); placeRail(a, z, 11); placeRail(a, z - 14, 14); if (Math.random() < .6) placeObs(pick(LOWS), b, z - 6); return 29; },
+  // перила по краям, препятствие посередине
+  railSide(z) { const L = pick([11, 14]); placeRail(0, z, L); placeRail(2, z - 3, L); placeObs(pick(['cone', 'box', 'barrier', 'jersey']), 1, z - 2); return L + 4; },
+  // два ряда препятствий подряд
+  double(z) { const [a, b] = L3(); placeObs(pick(LOWS), a, z); placeObs(pick(LOWS), b, z - 9); return 11; },
+  // коридор: машины и барьеры, свободная полоса меняется
+  gauntlet(z) { const [a, b, c] = L3(); placeObs('car', a, z); placeObs(pick(WALLS), b, z); placeObs(pick(LOWS), c, z - 12); placeObs('car', b, z - 12); return 17; },
   railDouble(z) { const [a, b, c] = L3(), L = pick([11, 14]); placeRail(a, z, L); placeRail(b, z - 2, L); if (Math.random() < .5) placeObs('cone', c, z); return L + 3; },
   lowbar(z) { const ls = L3().slice(0, randi(1, 3)); for (const l of ls) placeObs('lowbar', l, z); return 2; },
   pit(z) { const [a, b] = L3(); placeObs('pit', a, z); if (Math.random() < .5) placeObs('pit', b, z); return 3; },
@@ -1532,7 +1543,7 @@ function updateSpawner(dz) {
   while (spawnZ > -SPAWN_DIST) {
     let len, gapS;
     if (script && script.length) {
-      const s = script.shift(); const objs = s.f(spawnZ); len = s.len; gapS = 2.7;
+      const s = script.shift(); const objs = s.f(spawnZ); len = s.len; gapS = 2.2;
       hintQueue.push({ o: objs[0], sid: objs[0].userData.sid, text: s.h[IS_TOUCH ? 0 : 1] });
     } else { len = PAT[wpick(lv.pat)](spawnZ); gapS = rand(lv.gap[0], lv.gap[1]); }
     spawnZ -= len + Math.max(levelSpeed, 12) * gapS;
@@ -1605,13 +1616,13 @@ function updateCamera(dt) {
 // ================================================================
 const popEls = [...document.querySelectorAll('.pop')]; let popI = 0;
 function popup(text, cls = '', sub = '') {
-  const el = popEls[popI % popEls.length]; const slot = popI % 3; popI++;
+  const el = popEls[popI % popEls.length]; const slot = popI % 4; popI++;
   el.className = 'pop'; el.innerHTML = text + (sub ? `<small>${sub}</small>` : '');
-  el.style.top = (vh > vw ? 30 : 37) + slot * 8 + '%';
+  el.style.top = (vh > vw ? 27 : 30) + slot * (vh > vw ? 5 : 9) + '%';
   void el.offsetWidth; el.className = 'pop show ' + cls;
 }
 let hintT = 0;
-function hint(text, dur = 3) { const h = $('hint'); h.textContent = text; h.classList.add('show'); hintT = dur; }
+function hint(text, dur = 3) { if (save.hints === false) return; const h = $('hint'); h.textContent = text; h.classList.add('show'); hintT = dur; }
 function showScreen(id) { document.querySelectorAll('.screen').forEach(s => s.classList.toggle('show', s.id === id)); }
 function setGameUI(v) { $('hud').classList.toggle('show', v); $('controls').classList.toggle('show', v); if (v) resetJoy(); }
 const hudCache = {};
@@ -1644,7 +1655,7 @@ function startLevel(i) {
   clearObstacles(); resetPlayer();
   score = 0; pending = 0; combo = 0; chainTricks = 0; comboTimer = 0; tricksLanded = 0; maxCombo = 0; lives = lv.lives;
   levelT = 0; slowF = 1; levelSpeed = lv.v0; speed = 0; spawnZ = -45; finT = 0; resultShown = false;
-  script = lv.tutorial ? TUT.slice() : null; hintQueue.length = 0; arch.visible = false;
+  script = lv.tutorial && save.hints !== false ? TUT.slice() : null; hintQueue.length = 0; arch.visible = false;
   for (const k in hudCache) delete hudCache[k];
   $('hLevel').textContent = `LEVEL ${i + 1} · ${lv.name}`;
   updateLivesHUD();
@@ -1751,6 +1762,7 @@ function renderRecords() {
 function renderSettings() {
   for (const d of $('sSound').children) d.classList.toggle('on', (d.dataset.v === '1') === save.sound);
   for (const d of $('sQual').children) d.classList.toggle('on', d.dataset.v === save.quality);
+  for (const d of $('sHints').children) d.classList.toggle('on', (d.dataset.v === '1') === (save.hints !== false));
   for (const d of $('sFps').children) d.classList.toggle('on', (d.dataset.v === '1') === !!save.showFps);
 }
 function updateSoundLabels() { $('mSound').textContent = save.sound ? '🔊' : '🔇'; $('pSound').textContent = (save.sound ? '🔊' : '🔇') + ' ЗВУК: ' + (save.sound ? 'ВКЛ' : 'ВЫКЛ'); }
@@ -1767,10 +1779,11 @@ document.querySelectorAll('[data-back]').forEach(el => el.addEventListener('clic
 $('mSound').addEventListener('click', () => { setSound(!save.sound); Snd.click(); });
 $('sSound').addEventListener('click', e => { const v = e.target.dataset.v; if (v == null) return; setSound(v === '1'); Snd.click(); });
 $('sQual').addEventListener('click', e => { const v = e.target.dataset.v; if (!v) return; save.quality = v; persist(); applyQuality(v === 'auto' ? (IS_TOUCH ? 'medium' : 'high') : v); renderSettings(); Snd.click(); });
+$('sHints').addEventListener('click', e => { const v = e.target.dataset.v; if (v == null) return; save.hints = v === '1'; persist(); if (!save.hints) { $('hint').classList.remove('show'); hintT = 0; } renderSettings(); Snd.click(); });
 $('sFps').addEventListener('click', e => { const v = e.target.dataset.v; if (v == null) return; save.showFps = v === '1'; persist(); $('fps').style.display = save.showFps ? 'block' : 'none'; renderSettings(); Snd.click(); });
 $('bReset').addEventListener('click', () => { Snd.click(); showScreen('confirm'); });
 $('cNo').addEventListener('click', () => { Snd.click(); renderRecords(); showScreen('records'); });
-$('cYes').addEventListener('click', () => { Snd.click(); const keep = { sound: save.sound, quality: save.quality, showFps: save.showFps }; save = Object.assign(loadSaveDefaults(), keep); persist(); renderRecords(); showScreen('records'); });
+$('cYes').addEventListener('click', () => { Snd.click(); const keep = { sound: save.sound, quality: save.quality, showFps: save.showFps, hints: save.hints }; save = Object.assign(loadSaveDefaults(), keep); persist(); renderRecords(); showScreen('records'); });
 function loadSaveDefaults() { return JSON.parse(JSON.stringify(DEF_SAVE)); }
 $('bPause').addEventListener('pointerdown', e => { e.stopPropagation(); e.preventDefault(); Snd.click(); pauseGame(); });
 $('pResume').addEventListener('click', () => { Snd.click(); resumeGame(); });
@@ -1866,7 +1879,7 @@ addEventListener('blur', () => pauseGame());
 addEventListener('pagehide', () => { pauseGame(); Snd.suspend(); });
 
 function resize() {
-  vw = innerWidth; vh = innerHeight;
+  vw = canvas.clientWidth || innerWidth; vh = canvas.clientHeight || innerHeight;
   renderer.setSize(vw, vh, false);
   camera.aspect = vw / vh;
   if (Math.abs(offX) > .5 || Math.abs(offY) > .5) camera.setViewOffset(vw, vh, offX, offY, vw, vh);
