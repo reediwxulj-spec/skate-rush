@@ -141,7 +141,18 @@ html,body,#c,#hud,#controls,.screen,#vign,#flash{bottom:auto;height:100vh;height
 #bFlip{right:calc(150px + var(--sar));bottom:calc(16px + var(--sab));width:78px;height:78px;background:radial-gradient(circle at 35% 28%,#ffe98a,#ffbf00 70%,#f09000);color:var(--navy);text-shadow:none}
 #bSpin{right:calc(132px + var(--sar));bottom:calc(112px + var(--sab));width:78px;height:78px;background:radial-gradient(circle at 35% 28%,#9ffcea,#1fd1b0 70%,#0ea58a)}
 #bGrind{right:calc(38px + var(--sar));bottom:calc(156px + var(--sab));width:78px;height:78px;background:radial-gradient(circle at 35% 28%,#c7a6ff,#8b5cf6 70%,#6d3ce0)}
+/* левая панель трюков (2×2) */
+.ctl.tl{width:72px;height:72px;font-size:13px}
+#bHeel{left:calc(22px + var(--sal));bottom:calc(20px + var(--sab));background:radial-gradient(circle at 35% 28%,#ffc48a,#ff8a1f 70%,#e06a00)}
+#bBack{left:calc(108px + var(--sal));bottom:calc(20px + var(--sab));background:radial-gradient(circle at 35% 28%,#9fd0ff,#3a86ff 70%,#1f63d6)}
+#bShove{left:calc(22px + var(--sal));bottom:calc(108px + var(--sab));background:radial-gradient(circle at 35% 28%,#b7f59a,#4cc94c 70%,#2c9f36)}
+#bTre{left:calc(108px + var(--sal));bottom:calc(108px + var(--sab));background:radial-gradient(circle at 35% 28%,#ffa3d6,#e84393 70%,#b8236f)}
 @media (orientation:portrait){
+ .ctl.tl{width:62px;height:62px;font-size:12px}
+ #bHeel{left:calc(16px + var(--sal));bottom:calc(24px + var(--sab))}
+ #bBack{left:calc(90px + var(--sal));bottom:calc(24px + var(--sab))}
+ #bShove{left:calc(16px + var(--sal));bottom:calc(98px + var(--sab))}
+ #bTre{left:calc(90px + var(--sal));bottom:calc(98px + var(--sab))}
  #bJump{width:98px;height:98px;font-size:20px;bottom:calc(26px + var(--sab))}
  #bFlip{width:66px;height:66px;right:calc(128px + var(--sar));bottom:calc(20px + var(--sab))}
  #bSpin{width:66px;height:66px;right:calc(114px + var(--sar));bottom:calc(98px + var(--sab))}
@@ -227,7 +238,7 @@ html,body,#c,#hud,#controls,.screen,#vign,#flash{bottom:auto;height:100vh;height
  <div class="row">Графика<div class="seg" id="sQual"><div data-v="auto">AUTO</div><div data-v="low">LOW</div><div data-v="medium">MED</div><div data-v="high">HIGH</div></div></div>
  <div class="row">Подсказки<div class="seg" id="sHints"><div data-v="1">ВКЛ</div><div data-v="0">ВЫКЛ</div></div></div>
  <div class="row">Показывать FPS<div class="seg" id="sFps"><div data-v="1">ДА</div><div data-v="0">НЕТ</div></div></div>
- <div class="help"><b>Телефон:</b> джойстик ←→ — полоса, ↑ — прыжок, ↓ — пригнуться. JUMP — Ollie. В воздухе: FLIP — Kickflip (с ↓ — Heelflip), SPIN — 360 (с ↑ — Backflip). GRIND — у красных перил.<br><b>Клавиатура:</b> ←→/A D — полоса, ↑/W — прыжок, ↓/S — пригнуться, Пробел — Ollie, J — Flip, K — Spin, L — Grind, Esc/P — пауза.</div>
+ <div class="help"><b>Телефон:</b> свайп ←→ — полоса, ↑ — прыжок, ↓ — присесть (в воздухе — быстрое приземление). JUMP — Ollie. Трюки в прыжке: FLIP — Kickflip, SPIN — 360, слева — Heelflip, Backflip, Shove-it, Tre flip. GRIND — у красных перил.<br><b>Клавиатура:</b> ←→/A D — полоса, ↑/W — прыжок, ↓/S — присесть, Пробел — Ollie, J — Kickflip, K — 360, H — Heelflip, B — Backflip, U — Shove-it, I — Tre flip, L — Grind, Esc/P — пауза.</div>
 </div></div></div>
 
 <div id="hud">
@@ -238,10 +249,13 @@ html,body,#c,#hud,#controls,.screen,#vign,#flash{bottom:auto;height:100vh;height
 </div>
 
 <div id="controls">
- <div id="joyZone"><div id="joyBase"><div id="joyKnob"></div></div></div>
+ <div class="ctl tl" id="bTre" data-a="tre">TRE<small>FLIP</small></div>
+ <div class="ctl tl" id="bShove" data-a="shove">SHOVE<small>IT</small></div>
+ <div class="ctl tl" id="bBack" data-a="back">BACK<small>FLIP</small></div>
+ <div class="ctl tl" id="bHeel" data-a="heel">HEEL<small>FLIP</small></div>
  <div class="ctl" id="bGrind" data-a="grind">GRIND</div>
- <div class="ctl" id="bSpin" data-a="spin">SPIN<small>↑ BACKFLIP</small></div>
- <div class="ctl" id="bFlip" data-a="flip">FLIP<small>↓ HEEL</small></div>
+ <div class="ctl" id="bSpin" data-a="spin">SPIN<small>360</small></div>
+ <div class="ctl" id="bFlip" data-a="flip">FLIP<small>KICK</small></div>
  <div class="ctl" id="bJump" data-a="jump">JUMP</div>
 </div>
 
@@ -1173,12 +1187,14 @@ const hintQueue = [];
 const P = { x: 0, lane: 1, tx: 0, y: 0, vy: 0, state: 'ground', crouch: false, trick: null, queued: null, ollieT: -1, onRamp: null, rampU: 0, platform: null, rail: null,
   grindPts: 0, invuln: 0, crashT: 0, crashDir: 1, wobble: 0, landSquash: 0, jumpBuf: 0, grindBuf: 0, pushT: 2, pushP: -1, demoT: 2.5, hop: false };
 function resetPlayer() {
-  Object.assign(P, { x: 0, lane: 1, tx: 0, y: 0, vy: 0, state: 'ground', crouch: false, trick: null, queued: null, ollieT: -1, onRamp: null, rampU: 0, platform: null, rail: null, grindPts: 0, invuln: 0, crashT: 0, wobble: 0, landSquash: 0, jumpBuf: 0, grindBuf: 0, pushT: 2, pushP: -1, hop: false });
+  Object.assign(P, { x: 0, lane: 1, tx: 0, y: 0, vy: 0, state: 'ground', crouch: false, trick: null, queued: null, ollieT: -1, onRamp: null, rampU: 0, platform: null, rail: null, grindPts: 0, crouchT: 0, invuln: 0, crashT: 0, wobble: 0, landSquash: 0, jumpBuf: 0, grindBuf: 0, pushT: 2, pushP: -1, hop: false });
 }
 const TRICKS = {
   kickflip: { name: 'KICKFLIP', pts: 300, dur: .42 },
   heelflip: { name: 'HEELFLIP', pts: 300, dur: .42 },
   spin: { name: '360 SPIN', pts: 400, dur: .5 },
+  shove: { name: 'SHOVE-IT', pts: 350, dur: .4 },
+  tre: { name: 'TRE FLIP', pts: 700, dur: .55 },
   backflip: { name: 'BACKFLIP', pts: 600, dur: .6 },
 };
 const isPlaying = () => state === 'play' || state === 'finish';
@@ -1363,6 +1379,8 @@ function checkCollisions() {
       case 'rail':
         if (P.state === 'grind' && P.rail === o) break;
         if (P.y >= RAIL_TOP - .08) break;
+        // GRIND нажат/зажат — «примагничиваемся» к перилам вместо падения
+        if ((P.grindBuf > 0 || grindHeld()) && dx < .6 && (P.state === 'air' || P.state === 'ground')) { startGrind(o); return; }
         crash(o); return;
       case 'pit':
         if (P.state === 'ground' && !P.onRamp && !P.platform && P.y < .05 && dx < df.hw - .25 && dzz < df.hd - .35) { popup('В ЯМУ!', 'bad'); crash(o); return; }
@@ -1388,7 +1406,8 @@ function updatePlayer(dt) {
   if (P.jumpBuf > 0) P.jumpBuf -= dt;
   if (P.grindBuf > 0) P.grindBuf -= dt;
   if (P.ollieT >= 0) { P.ollieT += dt; if (P.ollieT > .4) P.ollieT = -1; }
-  P.crouch = playing && P.state === 'ground' && inDown();
+  if (P.crouchT > 0) P.crouchT -= dt;
+  P.crouch = playing && P.state === 'ground' && (inDown() || P.crouchT > 0 || (sw && sw.holdDown));
   if (P.trick) {
     P.trick.t += dt * (P.trick.fin ? 3.5 : 1);
     if (P.trick.t >= P.trick.dur) {
@@ -1472,6 +1491,8 @@ function animateSkater(dt) {
     else if (tt === 'heelflip') { S.flip.rotation.z = p * TAU; S.rider.position.y += .22 * Math.sin(Math.PI * p); }
     else if (tt === 'spin') S.spin.rotation.y = -p * TAU;
     else if (tt === 'backflip') S.spin.rotation.x = p * TAU;
+    else if (tt === 'shove') { S.flip.rotation.y = -p * TAU; S.rider.position.y += .18 * Math.sin(Math.PI * p); }
+    else if (tt === 'tre') { S.flip.rotation.y = -p * TAU; S.flip.rotation.z = -p * TAU; S.rider.position.y += .25 * Math.sin(Math.PI * p); }
   }
   if (P.state === 'crash') {
     const c = 1 - P.crashT / .85;
@@ -1523,14 +1544,14 @@ const PAT = {
   mixed(z) { const [a, b, c] = L3(); placeObs(pick(WALLS), a, z); placeObs('car', b, z); placeObs('lowbar', c, z); return 5; },
 };
 const TUT = [
-  { f: z => [placeObs('box', 1, z)], len: 2, h: ['Сдвинь джойстик ← → — смени полосу', '← → или A / D — смена полосы'] },
-  { f: z => [placeObs('barrier', 1, z), placeObs('barrier', 0, z), placeObs('barrier', 2, z)], len: 2, h: ['Жми JUMP — Ollie через барьер!', 'ПРОБЕЛ — прыжок Ollie'] },
+  { f: z => [placeObs('box', 1, z)], len: 2, h: ['Свайп ← → — смени полосу', '← → или A / D — смена полосы'] },
+  { f: z => [placeObs('barrier', 1, z), placeObs('barrier', 0, z), placeObs('barrier', 2, z)], len: 2, h: ['Жми JUMP или свайп ↑ — прыжок!', 'ПРОБЕЛ — прыжок Ollie'] },
   { f: z => [placeObs('cone', 1, z), placeObs('cone', 0, z), placeObs('cone', 2, z)], len: 2, h: ['В прыжке жми FLIP или SPIN — трюки!', 'В прыжке: J — Kickflip, K — 360 Spin'] },
-  { f: z => [placeObs('lowbar', 1, z), placeObs('lowbar', 0, z), placeObs('lowbar', 2, z)], len: 2, h: ['Джойстик ↓ — пригнись под перекладиной', '↓ или S — пригнуться'] },
+  { f: z => [placeObs('lowbar', 1, z), placeObs('lowbar', 0, z), placeObs('lowbar', 2, z)], len: 2, h: ['Свайп ↓ — пригнись под перекладиной', '↓ или S — пригнуться'] },
   { f: z => [placeObs('ramp', 1, z), placeObs('cone', 0, z - 2), placeObs('cone', 2, z - 2)], len: 5, h: ['Трамплин! Лети высоко и крути трюки', 'Трамплин! Лети высоко и крути трюки'] },
   { f: z => [placeRail(1, z, 14), placeObs('box', 0, z - 2), placeObs('box', 2, z - 2)], len: 15, h: ['Перила! Подъезжай и жми GRIND', 'Перила! Подъезжай и жми L — Grind'] },
   { f: z => [placeObs('pit', 1, z), placeObs('cone', 0, z), placeObs('cone', 2, z)], len: 3, h: ['Яма! Перепрыгни её', 'Яма! Перепрыгни её'] },
-  { f: z => [placeObs('box', 1, z)], len: 2, h: ['FLIP + ↓ = Heelflip,  SPIN + ↑ = Backflip', 'J + ↓ = Heelflip,  K + ↑ = Backflip'] },
+  { f: z => [placeObs('box', 1, z)], len: 2, h: ['Слева ещё трюки: HEEL, BACK, SHOVE-IT, TRE FLIP', 'H — Heelflip, B — Backflip, U — Shove-it, I — Tre flip'] },
   { f: z => [placeObs('car', 1, z), placeObs('cone', 0, z - 1)], len: 5, h: ['Машину не перепрыгнуть — объезжай!', 'Машину не перепрыгнуть — объезжай!'] },
 ];
 function wpick(w) { let s = 0; for (const k in w) s += w[k]; let r = Math.random() * s; for (const k in w) { r -= w[k]; if (r <= 0) return k; } return Object.keys(w)[0]; }
@@ -1670,7 +1691,7 @@ function updateCountdown(dt) {
   if (n !== cdLast) {
     cdLast = n; el.style.display = 'block'; el.textContent = n > 0 ? n : 'GO!';
     el.classList.remove('anim'); void el.offsetWidth; el.classList.add('anim'); Snd.beep(n === 0);
-    if (n === 0 && LEVELS[cur].tutorial) hint(IS_TOUCH ? 'Слева — джойстик, справа — кнопки трюков' : 'Клавиатура: стрелки, Пробел, J, K, L', 2.6);
+    if (n === 0 && LEVELS[cur].tutorial) hint(IS_TOUCH ? 'Свайпы — движение, кнопки — трюки' : 'Клавиатура: стрелки, Пробел, J, K, L', 2.6);
   }
   if (cdT <= 0) { el.style.display = 'none'; state = 'play'; speed = LEVELS[cur].v0; }
 }
@@ -1731,7 +1752,7 @@ function pauseGame() {
   if (!(state === 'play' || state === 'countdown' || state === 'finish')) return;
   prevState = state; state = 'paused'; needRender = true;
   for (const b of document.querySelectorAll('.ctl.on')) b.classList.remove('on');
-  IN.bGrind = false; IN.kDown = IN.kUp = IN.kGrind = false; IN.joy.x = IN.joy.y = 0;
+  IN.bGrind = false; IN.kDown = IN.kUp = IN.kGrind = false; sw = null;
   Snd.quiet(); updateSoundLabels(); showScreen('pause');
 }
 function resumeGame() {
@@ -1795,31 +1816,14 @@ $('rNext').addEventListener('click', () => { Snd.click(); if (cur < 2 && save.un
 $('rMenu').addEventListener('click', () => { Snd.click(); toMenu(); });
 
 // ---------------- touch controls ----------------
-const jz = $('joyZone'), jb = $('joyBase'), jk = $('joyKnob'), JR = 52;
-let joyHome = { x: 110, y: 0 };
-function placeJoy(x, y) { const r = jz.getBoundingClientRect(); jb.style.left = (x - r.left) + 'px'; jb.style.top = (y - r.top) + 'px'; }
-function resetJoy() { const r = jz.getBoundingClientRect(); const sal = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--sal')) || 0; if (r.width < 10) return; joyHome = { x: r.left + sal + Math.max(90, Math.min(130, r.width * .35)), y: r.bottom - Math.max(90, Math.min(125, r.height * .4)) - (parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--sab')) || 0) }; placeJoy(joyHome.x, joyHome.y); }
-function joyLogic() {
-  const j = IN.joy;
-  if (j.x > .5 && j.latX !== 1) { j.latX = 1; laneMove(1); }
-  else if (j.x < -.5 && j.latX !== -1) { j.latX = -1; laneMove(-1); }
-  else if (Math.abs(j.x) < .25) j.latX = 0;
-  if (j.y > .55 && j.latY !== 1) { j.latY = 1; actHop(); }
-  else if (j.y < .3) j.latY = 0;
+function resetJoy() {}
+// Свайпы по экрану: ← → полоса, ↑ прыжок, ↓ присесть (в воздухе — быстрое приземление)
+function actDown() {
+  if (!canAct()) return;
+  if (P.state === 'ground') { P.crouchT = .75; }
+  else if (P.state === 'air') { P.vy = Math.min(P.vy, -14); }
+  else if (P.state === 'grind') { endGrind(); P.vy = -6; }
 }
-function joyMove(e) {
-  let dx = e.clientX - IN.joy.cx, dy = e.clientY - IN.joy.cy; const l = Math.hypot(dx, dy);
-  if (l > JR) { dx *= JR / l; dy *= JR / l; }
-  jk.style.transform = `translate(${dx}px,${dy}px)`; IN.joy.x = dx / JR; IN.joy.y = -dy / JR; joyLogic();
-}
-jz.addEventListener('pointerdown', e => {
-  if (IN.joy.id !== null) return; e.preventDefault();
-  IN.joy.id = e.pointerId; try { jz.setPointerCapture(e.pointerId); } catch (er) {}
-  IN.joy.cx = e.clientX; IN.joy.cy = e.clientY; placeJoy(e.clientX, e.clientY); jb.classList.add('on'); joyMove(e);
-});
-jz.addEventListener('pointermove', e => { if (e.pointerId === IN.joy.id) joyMove(e); });
-const joyEnd = e => { if (e.pointerId !== IN.joy.id) return; IN.joy.id = null; IN.joy.x = IN.joy.y = 0; IN.joy.latX = IN.joy.latY = 0; jk.style.transform = ''; jb.classList.remove('on'); placeJoy(joyHome.x, joyHome.y); };
-jz.addEventListener('pointerup', joyEnd); jz.addEventListener('pointercancel', joyEnd); jz.addEventListener('lostpointercapture', joyEnd);
 const btnPtr = new Map();
 document.querySelectorAll('.ctl').forEach(el => {
   el.addEventListener('pointerdown', e => {
@@ -1827,20 +1831,26 @@ document.querySelectorAll('.ctl').forEach(el => {
     try { el.setPointerCapture(e.pointerId); } catch (er) {}
     const a = el.dataset.a;
     if (a === 'jump') actJump(); else if (a === 'flip') actFlip(); else if (a === 'spin') actSpin(); else if (a === 'grind') { IN.bGrind = true; actGrind(); }
+    else if (a === 'heel') airTrick('heelflip'); else if (a === 'back') airTrick('backflip'); else if (a === 'shove') airTrick('shove'); else if (a === 'tre') airTrick('tre');
   });
 });
 const btnUp = e => { const el = btnPtr.get(e.pointerId); if (!el) return; el.classList.remove('on'); btnPtr.delete(e.pointerId); if (el.dataset.a === 'grind') IN.bGrind = false; };
 window.addEventListener('pointerup', btnUp); window.addEventListener('pointercancel', btnUp);
-// swipe on the 3D view (extra one-handed control)
+// swipe controls on the 3D view
 let sw = null;
-canvas.addEventListener('pointerdown', e => { if (isPlaying()) sw = { id: e.pointerId, x: e.clientX, y: e.clientY, done: false }; });
+const SW_T = 26;
+canvas.addEventListener('pointerdown', e => { if (isPlaying()) { sw = { id: e.pointerId, x: e.clientX, y: e.clientY, holdDown: false }; try { canvas.setPointerCapture(e.pointerId); } catch (er) {} } });
 canvas.addEventListener('pointermove', e => {
-  if (!sw || sw.id !== e.pointerId || sw.done) return;
-  const dx = e.clientX - sw.x, dy = e.clientY - sw.y;
-  if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) { laneMove(dx > 0 ? 1 : -1); sw.done = true; }
-  else if (dy < -40 && Math.abs(dy) > Math.abs(dx)) { actJump(); sw.done = true; }
+  if (!sw || sw.id !== e.pointerId) return;
+  const dx = e.clientX - sw.x, dy = e.clientY - sw.y, ax = Math.abs(dx), ay = Math.abs(dy);
+  if (ax < SW_T && ay < SW_T) return;
+  if (ax > ay) { laneMove(dx > 0 ? 1 : -1); sw.holdDown = false; }
+  else if (dy < 0) { actJump(); sw.holdDown = false; }
+  else { actDown(); sw.holdDown = true; }
+  sw.x = e.clientX; sw.y = e.clientY; // можно делать несколько свайпов, не отрывая палец
 });
-canvas.addEventListener('pointerup', () => { sw = null; });
+const swEnd = e => { if (sw && sw.id === e.pointerId) sw = null; };
+canvas.addEventListener('pointerup', swEnd); canvas.addEventListener('pointercancel', swEnd);
 
 // ---------------- keyboard ----------------
 const NOSCROLL = ['Space', 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'];
@@ -1848,7 +1858,7 @@ addEventListener('keydown', e => {
   const c = e.code;
   if (NOSCROLL.includes(c)) e.preventDefault();
   if (c === 'Escape' || c === 'KeyP') { if (!e.repeat) { if (state === 'paused') resumeGame(); else pauseGame(); } return; }
-  if (c === 'ArrowDown' || c === 'KeyS') IN.kDown = true;
+  if (c === 'ArrowDown' || c === 'KeyS') { if (!IN.kDown && P.state !== 'ground') actDown(); IN.kDown = true; }
   if (c === 'ArrowUp' || c === 'KeyW') IN.kUp = true;
   if (c === 'KeyL') IN.kGrind = true;
   if (e.repeat) return;
@@ -1859,6 +1869,10 @@ addEventListener('keydown', e => {
     case 'Space': actJump(); break;
     case 'KeyJ': actFlip(); break;
     case 'KeyK': actSpin(); break;
+    case 'KeyH': airTrick('heelflip'); break;
+    case 'KeyB': airTrick('backflip'); break;
+    case 'KeyU': airTrick('shove'); break;
+    case 'KeyI': airTrick('tre'); break;
     case 'KeyL': actGrind(); break;
     case 'Enter': if (state === 'menu') go('play'); break;
   }
